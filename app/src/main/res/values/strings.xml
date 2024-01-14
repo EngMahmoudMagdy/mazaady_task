@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MazaadyTask</string>
+    <string name="first_page">First Page</string>
+    <string name="second_page">Second Page</string>
+    <string name="main_category">Main Category</string>
+    <string name="subcategory">Sub Category</string>
+    <string name="loading_please_wait">Loading, Please Wait...</string>
+    <string name="search">Search</string>
+    <string name="no_matching_items_found">No matching items found.</string>
+    <string name="other">Other</string>
+</resources>
