@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.magdy.mazaadytask.R
 import com.magdy.mazaadytask.firstPage.FirstPageActivity
+import com.magdy.mazaadytask.secondPage.SecondPageActivity
 
 class ChoosePageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,7 @@ class ChoosePageActivity : AppCompatActivity() {
             startActivity(Intent(this,FirstPageActivity::class.java))
         }
         findViewById<Button>(R.id.secondPage).setOnClickListener {
-            startActivity(Intent(this,FirstPageActivity::class.java))
+            startActivity(Intent(this, SecondPageActivity::class.java))
         }
     }
 
