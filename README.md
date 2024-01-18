@@ -8,5 +8,5 @@ https://github.com/EngMahmoudMagdy/mazaady_task/assets/16431109/e240b893-764b-4d
 
 ## Here is Second Screen Record:
 
-[![Watch Video 2](/recording/second_screen_record.mp4)](https://github.com/EngMahmoudMagdy/mazaady_task/recording/second_screen_record.mp4)
+https://github.com/EngMahmoudMagdy/mazaady_task/assets/16431109/8482a9e6-23ff-49ce-ae88-92b256ec18c5
 
