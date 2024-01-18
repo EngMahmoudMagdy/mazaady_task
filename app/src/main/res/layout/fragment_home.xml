@@ -216,26 +216,28 @@
 
         </HorizontalScrollView>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipChildren="false"
             android:clipToPadding="false"
-            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/indicatorLayout"
-            app:layout_constraintTop_toBottomOf="@id/chip_group"
-            tools:listitem="@layout/item_section_pager" />
+            app:layout_constraintTop_toBottomOf="@id/chip_group" />
 
-        <LinearLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/indicatorLayout"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/green"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="6dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/slider" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/slider"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabMaxWidth="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
