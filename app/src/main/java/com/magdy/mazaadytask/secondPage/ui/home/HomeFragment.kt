@@ -43,15 +43,7 @@ class HomeFragment : Fragment() {
         slider.adapter = adapter
         slider.offscreenPageLimit = 3
         slider.addCarouselEffect(enableZoom = true)
-        slider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                if (position == adapter.itemCount - 1) {
-                    slider.setCurrentItem(1, false)
-                } else if (position == 0) {
-                    slider.setCurrentItem(adapter.itemCount - 2, false)
-                }
-            }
-        })
+
         TabLayoutMediator(indicatorLayout, slider) { tab, position ->
             //Some implementation
         }.attach()

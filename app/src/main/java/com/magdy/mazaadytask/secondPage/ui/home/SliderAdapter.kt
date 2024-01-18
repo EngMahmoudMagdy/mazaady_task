@@ -20,5 +20,5 @@ class SliderAdapter(private val items: List<Int>) :
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
     }
 
-    override fun getItemCount(): Int = Int.MAX_VALUE
+    override fun getItemCount(): Int = items.size
 }
