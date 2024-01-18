@@ -18,9 +18,7 @@ class SliderAdapter(private val items: List<Int>) :
     }
 
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
-        // Bind your slide content here
-        // For example: holder.itemView.findViewById<ImageView>(R.id.imageView).setImageResource(items[position])
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = Int.MAX_VALUE
 }

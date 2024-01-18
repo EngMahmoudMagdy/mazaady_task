@@ -1,13 +1,17 @@
 package com.magdy.mazaadytask.secondPage.ui.home
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.magdy.mazaadytask.R
 import com.magdy.mazaadytask.databinding.FragmentHomeBinding
 import kotlin.math.abs
 
@@ -38,8 +42,16 @@ class HomeFragment : Fragment() {
         val adapter = SliderAdapter(items)
         slider.adapter = adapter
         slider.offscreenPageLimit = 3
-        slider.setPageTransformer(addTransformer())
-
+        slider.addCarouselEffect(enableZoom = true)
+        slider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                if (position == adapter.itemCount - 1) {
+                    slider.setCurrentItem(1, false)
+                } else if (position == 0) {
+                    slider.setCurrentItem(adapter.itemCount - 2, false)
+                }
+            }
+        })
         TabLayoutMediator(indicatorLayout, slider) { tab, position ->
             //Some implementation
         }.attach()
@@ -48,34 +60,26 @@ class HomeFragment : Fragment() {
         storiesRecycler.adapter = storyAdapter
     }
 
-    private fun addTransformer(): CompositePageTransformer {
-        return CompositePageTransformer().apply {
-            addTransformer { page, position ->
-                val offset = 30
-                when {
-                    position < -1 -> { // Page is off to the left
-                        page.translationX = 0f
-                        page.scaleX = 1f
-                        page.scaleY = 1f
-                    }
-                    position <= 0 -> { // Page is in the process of sliding in
-                        page.translationX = -offset * position
-                        page.scaleX = 1f
-                        page.scaleY = 1f
-                    }
-                    position <= 1 -> { // Page is in the process of sliding out
-                        page.translationX = offset * -position
-                        page.scaleX = 1f
-                        page.scaleY = 1f
-                    }
-                    else -> { // Page is off to the right
-                        page.translationX = 0f
-                        page.scaleX = 1f
-                        page.scaleY = 1f
-                    }
-                }
+    fun ViewPager2.addCarouselEffect(enableZoom: Boolean = true) {
+        clipChildren = false    // No clipping the left and right items
+        clipToPadding = false   // Show the viewpager in full width without clipping the padding
+        offscreenPageLimit = 3  // Render the left and right items
+        (getChildAt(0) as RecyclerView).overScrollMode =
+            RecyclerView.OVER_SCROLL_NEVER // Remove the scroll effect
+        val nextItemVisiblePx = resources.getDimension(R.dimen.viewpager_next_item_visible)
+        val currentItemHorizontalMarginPx =
+            resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
+        val pageTranslationX = nextItemVisiblePx + currentItemHorizontalMarginPx
+        val compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(MarginPageTransformer((20 * Resources.getSystem().displayMetrics.density).toInt()))
+        if (enableZoom) {
+            compositePageTransformer.addTransformer { page, position ->
+                page.translationX = -pageTranslationX * position
+                val r = 1 - abs(position)
+                page.scaleY = (0.80f + r * 0.20f)
+                page.alpha = 0.25f + (1 - abs(position))
             }
         }
+        setPageTransformer(compositePageTransformer)
     }
-
 }
